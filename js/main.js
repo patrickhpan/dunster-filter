@@ -24,3 +24,21 @@ function readImage() {
 }
 
 el("fileUpload").addEventListener("change", readImage, false);
+
+
+function convertCanvasToImage(canvas) {
+        var image = new Image();
+        image.src = canvas.toDataURL("image/png");
+        return image;
+    }
+
+el("canvas").onclick= function(e){
+
+    var image = convertCanvasToImage(e.target);
+    var anchor = document.createElement('a');
+
+    console.log(anchor);
+    anchor.setAttribute('href', image.src);
+    anchor.setAttribute('download', 'image.png');
+    anchor.click();
+}
