@@ -16,6 +16,17 @@ function readImage() {
              context.drawImage(img, 0, 0, canvas.width, canvas.width * img.height / img.width);
              var overlay = el("overlay");
              context.drawImage(overlay, 0, 0, canvas.width, canvas.width * overlay.height / overlay.width);
+             el("canvas").onclick= function(e){
+
+                 var image = convertCanvasToImage(e.target);
+                 var anchor = document.createElement('a');
+
+                 console.log(anchor);
+                 anchor.setAttribute('href', image.src);
+                 anchor.setAttribute('download', 'image.png');
+                 anchor.click();
+             }
+
            };
            img.src = e.target.result;
         };
@@ -31,14 +42,3 @@ function convertCanvasToImage(canvas) {
         image.src = canvas.toDataURL("image/png");
         return image;
     }
-
-el("canvas").onclick= function(e){
-
-    var image = convertCanvasToImage(e.target);
-    var anchor = document.createElement('a');
-
-    console.log(anchor);
-    anchor.setAttribute('href', image.src);
-    anchor.setAttribute('download', 'image.png');
-    anchor.click();
-}
